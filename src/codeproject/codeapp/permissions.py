@@ -17,3 +17,9 @@ class EEPermission(permissions.BasePermission):
 class UserPermission(permissions.BasePermission):
     def has_object_permission(self,request,_,obj):
         return request.user.id == obj.id
+
+class PostPermission(permissions.BasePermission):
+    def has_object_permission(self,request,_,obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user.id == obj.whose.user.id

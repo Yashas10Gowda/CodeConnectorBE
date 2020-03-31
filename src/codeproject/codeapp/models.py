@@ -37,3 +37,8 @@ class Education(models.Model):
     college = models.CharField(max_length=30)
     frm_date = models.DateField()
     to_date = models.DateField()
+
+    
+class Post(models.Model):
+    whose = models.ForeignKey(Developer,on_delete=models.CASCADE)
+    text = models.TextField()

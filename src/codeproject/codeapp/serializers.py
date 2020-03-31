@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import USER,Developer,Education,Experience
+from .models import USER,Developer,Education,Experience,Post
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class DeveloperSerializer(serializers.ModelSerializer):
     class Meta:
         model = Developer
         fields = ('user','career','company','portfolioweb','location','skills','githublink',
-                  'tweetlink','fblink','instalink','tweetlink','youtubelink',)
+                  'tweetlink','fblink','instalink','youtubelink',)
         
         
 class ExperienceSerializer(serializers.ModelSerializer):
@@ -33,3 +33,9 @@ class EducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Education
         fields = ('id','whose','degree','college','frm_date','to_date',)
+        
+    
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id','whose','text',)
