@@ -1,15 +1,27 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets,views
 from .serializers import (UserSerializer,DeveloperSerializer,EducationSerializer,
                           ExperienceSerializer,PostSerializer)
 from .models import USER,Developer,Education,Experience,Post
 from .permissions import DeveloperPermission,EEPermission,UserPermission,PostPermission
-from rest_framework import response,authentication,permissions
+from rest_framework import response,permissions
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authentication import TokenAuthentication
+
+
+
+class TokenViewSet(viewsets.ViewSet):
+    serializer_class = AuthTokenSerializer
+    
+    def create(self,request):
+        return ObtainAuthToken().post(request)
 
 
 
 class UserViewset(viewsets.ModelViewSet):
     serializer_class = UserSerializer
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (UserPermission,)
     queryset = USER.objects.all()
     
@@ -17,6 +29,7 @@ class UserViewset(viewsets.ModelViewSet):
     
 class DeveloperViewset(viewsets.ModelViewSet):
     serializer_class = DeveloperSerializer
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (DeveloperPermission,)
     queryset = Developer.objects.all()
     
@@ -36,6 +49,7 @@ class DeveloperViewset(viewsets.ModelViewSet):
     
 class ExperienceViewset(viewsets.ModelViewSet):
     serializer_class = ExperienceSerializer
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (EEPermission,)
     queryset = Experience.objects.all()
 
@@ -53,6 +67,7 @@ class ExperienceViewset(viewsets.ModelViewSet):
     
 class EducationViewset(viewsets.ModelViewSet):
     serializer_class = EducationSerializer
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (EEPermission,)
     queryset = Education.objects.all()
     
@@ -68,7 +83,7 @@ class EducationViewset(viewsets.ModelViewSet):
     
 class PostViewset(viewsets.ModelViewSet):
     serializer_class = PostSerializer
-    authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (PostPermission,permissions.IsAuthenticated,) #posts must occur only wher usr is authnd
     queryset = Post.objects.all()                                       
 
