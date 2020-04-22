@@ -13,7 +13,7 @@ from rest_framework.authentication import TokenAuthentication
 
 class TokenViewSet(viewsets.ViewSet):
     serializer_class = AuthTokenSerializer
-    
+
     def create(self,request):
         return ObtainAuthToken().post(request)
 
@@ -24,29 +24,28 @@ class UserViewset(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (UserPermission,)
     queryset = USER.objects.all()
-    
-    
-    
+
+
+
 class DeveloperViewset(viewsets.ModelViewSet):
     serializer_class = DeveloperSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (DeveloperPermission,)
     queryset = Developer.objects.all()
-    
+
     def create(self,request):
         if request.user.is_authenticated:
             developer = Developer(user=USER.objects.get(id=request.user.id),career=request.data['career'],
                                   company=request.data['company'],portfolioweb=request.data['portfolioweb'],
-                                  location=request.data['location'],skills=request.data['skills'],
-                                  githublink=request.data['githublink'],tweetlink=request.data['tweetlink'],
-                                  fblink=request.data['fblink'],instalink=request.data['instalink'],
-                                  youtubelink=request.data['youtubelink'],)
+                                  location=request.data['location'],skills=request.data['skills'],bio=request.data['bio'],
+                                  github=request.data['github'],tweetlink=request.data['tweetlink'],
+                                  fblink=request.data['fblink'],instalink=request.data['instalink'],linkedinlink=request.data['linkedinlink'],
+                                  youtubelink=request.data['youtubelink'],username=USER.objects.get(id=request.user.id).username)
             developer.save()
             return response.Response({'Developer':request.user.username})
         return response.Response({'details':'Authentication Error'})
-    
-    
-    
+
+
 class ExperienceViewset(viewsets.ModelViewSet):
     serializer_class = ExperienceSerializer
     authentication_classes = (TokenAuthentication,)
@@ -62,15 +61,15 @@ class ExperienceViewset(viewsets.ModelViewSet):
             experience.save()
             return response.Response({'Experience':request.data['job_title']})
         return response.Response({'details':'Authentication Error'})
-    
-    
-    
+
+
+
 class EducationViewset(viewsets.ModelViewSet):
     serializer_class = EducationSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (EEPermission,)
     queryset = Education.objects.all()
-    
+
     def create(self,request):
         if request.user.is_authenticated:
             education = Education(whose=Developer.objects.get(user=request.user),degree=request.data['degree'],
@@ -79,17 +78,18 @@ class EducationViewset(viewsets.ModelViewSet):
             education.save()
             return response.Response({'Education':request.data['degree']})
         return response.Response({'details':'Authentication Error'})
-    
-    
+
+
 class PostViewset(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (PostPermission,permissions.IsAuthenticated,) #posts must occur only wher usr is authnd
-    queryset = Post.objects.all()                                       
+    queryset = Post.objects.all()
 
     def create(self,request):
         if request.user.is_authenticated:
-            post = Post(whose=Developer.objects.get(user=request.user),text=request.data['text'])
+            post = Post(whose=Developer.objects.get(user=request.user),text=request.data['text'],
+                        username=Developer.objects.get(username=request.user.username).username,)
             post.save()
             return response.Response({'PostText':request.data['text']})
         return response.Response({'details':'Authentication Error'})

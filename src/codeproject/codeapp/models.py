@@ -13,14 +13,16 @@ class Developer(models.Model):
     portfolioweb = models.URLField()
     location = models.CharField(max_length=30)
     skills = models.CharField(max_length=500)
-    githublink = models.URLField(blank=True, null=True)
+    bio = models.TextField(null=True)
+    github = models.CharField(max_length=50,blank=True, null=True)
     tweetlink = models.URLField(blank=True, null=True)
     fblink = models.URLField(blank=True, null=True)
     instalink = models.URLField(blank=True, null=True)
     tweetlink = models.URLField(blank=True, null=True)
-    youtubelink = models.URLField(blank=True, null=True) 
-    
-    
+    youtubelink = models.URLField(blank=True, null=True)
+    linkedinlink = models.URLField(blank=True,null=True)
+    username = models.CharField(max_length=50,blank=True,null=True)
+
 class Experience(models.Model):
     whose = models.ForeignKey(Developer,on_delete=models.CASCADE)
     job_title = models.CharField(max_length=30)
@@ -29,7 +31,7 @@ class Experience(models.Model):
     frm_date = models.DateField()
     to_date = models.DateField()
     job_des = models.CharField(max_length=500)
-    
+
 
 class Education(models.Model):
     whose = models.ForeignKey(Developer,on_delete=models.CASCADE)
@@ -38,7 +40,9 @@ class Education(models.Model):
     frm_date = models.DateField()
     to_date = models.DateField()
 
-    
+
 class Post(models.Model):
     whose = models.ForeignKey(Developer,on_delete=models.CASCADE)
     text = models.TextField()
+    date = models.DateField(auto_now=True)
+    username = models.CharField(max_length=50,blank=True)
