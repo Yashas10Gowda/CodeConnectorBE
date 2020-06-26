@@ -2,8 +2,8 @@ It's web application where you can connect, collaborate and get social with othe
 This is the Backend Repo.
 
 ## Technology Stack
-![Django](https://img.shields.io/badge/frontend-html5-orange?style=flat&logo=Django)
-![RestAPI](https://img.shields.io/badge/frontend-css3-blue?style=flat&logo=CSS3)
+![Django](https://img.shields.io/badge/backend-django-green?style=flat&logo=Django)
+![RestAPI](https://img.shields.io/badge/restAPI-DRF-red?style=flat&logo=Django)
 
 * BackEnd: **Python**, **Django**, **Django Rest Framework**
 
