@@ -8,7 +8,7 @@ This is the Backend Repo.
 * BackEnd: **Python**, **Django**, **Django Rest Framework**
 
 ## Prerequisites
-* [node](https://nodejs.org/en/) >= 3.8.2
+* [python](https://www.python.org/) >= 3.8.2
 * pip >= 19.3.1
 
 ## Installation
