@@ -3,7 +3,7 @@ This is the Backend Repo.
 
 ## Technology Stack
 ![Django](https://img.shields.io/badge/backend-django-green?style=flat&logo=Django)
-![RestAPI](https://img.shields.io/badge/restAPI-DRF-red?style=flat&logo=Django)
+![RestAPI](https://img.shields.io/badge/RestAPI-Django--Rest--Framework-red?style=flat&logo=Django)
 
 * BackEnd: **Python**, **Django**, **Django Rest Framework**
 
