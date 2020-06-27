@@ -1,5 +1,5 @@
 It's web application where you can connect, collaborate and get social with other developers around the world. This web application uses Svelte.JS as it's Frontend.
-This is the Backend Repo.
+This is the Backend Repo which uses token authentication.
 
 ## Technology Stack
 ![Django](https://img.shields.io/badge/backend-django-green?style=flat&logo=Django)
