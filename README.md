@@ -31,5 +31,5 @@ This is the Backend Repo which uses token authentication.
     ```
 
 ## Author
-[![Instagram](https://img.shields.io/badge/follow-%40yacchi_codes-1DA1F2?style=flat&logo=Instagram)](https://www.instagram.com/yacchi_codes) 
+[![Instagram](https://img.shields.io/badge/follow-%40ya_sha_sa-1DA1F2?style=flat&logo=Instagram)](https://www.instagram.com/ya_sha_sa) 
 
